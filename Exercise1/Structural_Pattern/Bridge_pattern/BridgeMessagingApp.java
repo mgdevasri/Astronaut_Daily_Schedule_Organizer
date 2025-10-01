@@ -1,18 +1,16 @@
 import java.util.Scanner;
 
-// Implementor (Message Sending Protocol)
 interface MessageSender {
     void sendMessage(String message, String recipient);
 }
-
-// Concrete Implementor 1: SMS
+//sms
 class SMSSender implements MessageSender {
     public void sendMessage(String message, String recipient) {
         System.out.println("Sending SMS to " + recipient + ": " + message);
     }
 }
 
-// Concrete Implementor 2: Email
+//  Email
 class EmailSender implements MessageSender {
     public void sendMessage(String message, String recipient) {
         System.out.println("Sending Email to " + recipient + ": " + message);
@@ -30,7 +28,7 @@ abstract class Message {
     public abstract void send(String message, String recipient);
 }
 
-// Refined Abstraction 1: Text Message
+//  Text Message
 class TextMessage extends Message {
     public TextMessage(MessageSender sender) {
         super(sender);
@@ -43,7 +41,7 @@ class TextMessage extends Message {
     }
 }
 
-// Refined Abstraction 2: Image Message
+// Image Message
 class ImageMessage extends Message {
     public ImageMessage(MessageSender sender) {
         super(sender);
@@ -73,12 +71,12 @@ public class BridgeMessagingApp {
         System.out.print("Choose protocol (sms/email): ");
         String protocol = sc.nextLine().toLowerCase();
 
-        // Choose sender
+       
         MessageSender sender;
         if (protocol.equals("sms")) sender = new SMSSender();
         else sender = new EmailSender();
 
-        // Choose message type
+       
         Message message;
         if (type.equals("text")) message = new TextMessage(sender);
         else message = new ImageMessage(sender);
